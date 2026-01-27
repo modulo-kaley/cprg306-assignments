@@ -2,5 +2,6 @@
     "accessibility.signals.lineHasError": {
         "sound": "off",
         "announcement": "off"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
