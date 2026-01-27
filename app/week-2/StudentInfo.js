@@ -7,7 +7,6 @@ export default function StudentInfo() {
             <p>
                 <Link className="" href="https://cprg306-assignments-olive-beta.vercel.app/">Click to Enter my Repository</Link>
             </p>
-            <Link/>
         </section> 
     );
 }
