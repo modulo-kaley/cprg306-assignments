@@ -1,4 +1,4 @@
-import Item from "./GroceryItem";
+import GroceryItem from "./GroceryItem";
 
 const item1 = {
   name: "milk, 4 L 🥛",
@@ -77,7 +77,7 @@ export default function GroceryItemList(){
     return(
         <ul>
             {items.map((item) =>(
-            <Item key={item.name} {...item} />
+            <GroceryItem key={item.name} {...item} />
             ))}
         </ul>
     );
