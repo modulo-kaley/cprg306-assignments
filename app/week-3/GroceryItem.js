@@ -8,7 +8,7 @@ export default function Item({name, quantity, category}){
         <h3> 
             {name}
         </h3>
-        <p>{quantity}{category}</p>
+        <p>{quantity} {category}</p>
        </article>
     );
 }
