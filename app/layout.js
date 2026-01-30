@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "CPRG306-Assignments",
+  title: "Oooh Yay! She has a Shopping List!",
   description: "Living, Laughing, Learning",
 };
 
