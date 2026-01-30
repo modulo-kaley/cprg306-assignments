@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Oooh Yay! She has a Shopping List!",
+  title: "Oooh, She has a Shopping List!",
   description: "Living, Laughing, Learning",
 };
 
