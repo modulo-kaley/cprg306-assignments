@@ -76,7 +76,7 @@ const items = [item1, item2, item3, item4, item5, item6, item7, item8, item9, it
 export default function GroceryItemList(){
     return(
       //in the future: <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        <ul className="grid grid-cols-3 gap-4 p-4">
+        <ul className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-4">
             {items.map((item) =>(
             <GroceryItem key={item.name} {...item} />
             ))}
