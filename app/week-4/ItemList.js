@@ -1,5 +1,5 @@
 import Item from "./Item";
-import jsonItems from "./items.json";
+import jsonItems from "./Items.json";
 
 export default function ItemList() {
     return (
