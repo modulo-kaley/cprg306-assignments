@@ -1,4 +1,4 @@
-import Item from "./item";
+import Item from "./Item";
 import jsonItems from "./items.json";
 
 export default function ItemList() {
