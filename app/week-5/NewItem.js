@@ -10,7 +10,7 @@ export default function NewItem(){
         event.preventDefault();
         const item = { name, quantity, category };
         console.log(item);
-        alert("An item was created with the name:" + name + ", quantity:" + quantity + ", and a category:" + category);
+        alert("An item was created with the name: " + name + ", quantity: " + quantity + ", and a category: " + category);
         setName("");
         setQuantity(1);
         setCategory("produce");
