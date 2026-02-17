@@ -2,15 +2,25 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-  <section className="items-center justify-center bg-purple-300 font-sans text-gray-600 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 p-4">
-      <h1 className="font-extrabold justify-items-normal">Web Development 2 - Assignments</h1>
-      <p>
-        <Link className="inline-flex justify-items-normal shrink-14 rounded-full border border-gray-600" href="/week-2">Week 2 Assignment</Link>
-        <Link className="inline-flex justify-items-normal shrink-14 rounded-full border border-gray-600" href="/week-3">Week 3 Assignment</Link>
-        <Link className="inline-flex justify-items-normal shrink-14 rounded-full border border-gray-600" href="/week-4">Week 4 Assignment</Link>
-        <Link className="inline-flex justify-items-normal shrink-14 rounded-full border border-gray-600" href="/week-5">Week 5 Assignment</Link>
+  <main className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center p-8">
+      <h1 className="font-bold text-4xl mb-2 tracking-tight">Web Development 2</h1>
+      <p className="text=gray-400 mb-12 text-lg">Assignments</p>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-lg">
+        <Link className="bg-gray-800 hover:bg-gray-700 transition-colors rounded-xl p-6 text-center font-semibold text-lg" href="/week-2">
+          Week Two
+        </Link>
+        <Link className="bg-gray-800 hover:bg-gray-700 transition-colors rounded-xl p-6 text-center font-semibold text-lg" href="/week-3">
+          Week Three
+        </Link>
+        <Link className="bg-gray-800 hover:bg-gray-700 transition-colors rounded-xl p-6 text-center font-semibold text-lg" href="/week-4">
+          Week Four
+        </Link>
+        <Link className="bg-gray-800 hover:bg-gray-700 transition-colors rounded-xl p-6 text-center font-semibold text-lg" href="/week-5">
+          Week Five
+        </Link>
 
-      </p>
-    </section>
+      </div>
+    </main>
   );
 }
