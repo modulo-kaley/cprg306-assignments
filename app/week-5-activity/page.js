@@ -1,3 +1,11 @@
+export default function Page(){
+  return (
+    <div>
+      <p>This is an activity I will return to at a later time</p>
+    </div>
+  );
+}
+
 // // TODO: add import for state and set this as a client rendered file
 // "use client";
 // import { useState } from "react";
