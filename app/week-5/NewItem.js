@@ -28,8 +28,8 @@ export default function NewItem(){
     };
 
     return (
-    <form onSubmit={handleSubmit}>
-        <label>
+    <form className="border-blue-300 bg-stone-400 text-black font-semibold "onSubmit={handleSubmit}>
+        <label className="min-w-72 rounded-full border-double text-center">
             Item Name: 
             <input className="w-full p-2 rounded-md" 
                 type="text" 
@@ -39,7 +39,7 @@ export default function NewItem(){
             />
         </label>
         <div className="flex-row">
-            <label>
+            <label className="min-w-72 rounded-full border-double text-center">
                 Item Quantity:
                 <input className=""
                     type="number"
@@ -50,7 +50,7 @@ export default function NewItem(){
                     value={quantity} onChange={(event) => setQuantity(event.target.value)}
                 />
             </label>
-            <label>
+            <label className="min-w-72 rounded-full border-double text-center">
                 Item Category:
                 <select placeholder="Category Menu" value={category} onChange={(event) => setCategory(event.target.value)}> 
                     <option value="produce">Produce</option>
@@ -67,7 +67,7 @@ export default function NewItem(){
                 </select>
             </label>
         </div>
-       <button type="submit" >+</button>
+       <button className="min-w-72 rounded-full border-double text-center text-stone-200 border-stone-600 p-4 shadow-cyan-800 bg-blue-300 hover:bg-blue-500" type="submit">+</button>
     </form>
     );
 }
