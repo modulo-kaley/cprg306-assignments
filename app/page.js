@@ -24,7 +24,7 @@ export default function Home(){
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
-        {weeks.map(({ label, href}) => (
+        {weeks.map(({ label, href}, index) => (
           <Link 
             key={href}
             href={href}
