@@ -21,6 +21,9 @@ export default function Home() {
         <Link className="bg-gray-800 hover:bg-gray-700 transition-colors rounded-xl p-6 text-center font-semibold text-lg" href="/week-5">
           Week Five
         </Link>
+        <Link className="bg-gray-800 hover:bg-gray-700 transition-colors rounded-xl p-6 text-center font-semibold text-lg" href="/week-6">
+          Week Five
+        </Link>
 
       </div>
     </main>
