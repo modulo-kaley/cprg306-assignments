@@ -6,7 +6,7 @@ export default function Home(){
     { label: "Week Three", href: "/week-3" },
     { label: "Week Four", href: "/week-4" },
     { label: "Week Five", href: "/week-5"},
-    { label: "Week Six", href: "/week-6"},
+    { label: "Week Six", href: "/week-6" },
   ];
 
   return ( 
@@ -28,7 +28,7 @@ export default function Home(){
           <Link 
             key={href}
             href={href}
-            className="
+            className={`
             rounded-lg bg-earth-bison dark:bg-earth-soya
             border border-earth-stonewall/30 dark:border-earth-stonewall/20
             px-6 py-4
@@ -36,7 +36,10 @@ export default function Home(){
             text-earth-armadillo dark:text-earth-pearl
             hover:bg-earth-stonewall dark:hover:bg-earth-oyster
             hover:text-earth-pearl dark:hover:text-earth-armadillo
-            transition-colors duration-200">
+            transition-colors duration-200
+             ${index === weeks.length - 1 && weeks.length % 2 !== 0 ? "sm:col-span-2" : ""}
+            `}
+            >
             {label}
           </Link>
         ))}
