@@ -1,3 +1,4 @@
+"use client";
 import NewItem from "./NewItem";
 import ItemList from "./ItemList";
 import itemsData from "./Item.json";
