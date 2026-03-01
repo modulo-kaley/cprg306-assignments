@@ -20,7 +20,7 @@ export default function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setIsDark(!isDark)}
+      onClick={() => alert("🚧 Dark/Light mode is under construction!")}
       className="
         fixed top-4 right-4 z-50
         w-12 h-12 rounded-full
