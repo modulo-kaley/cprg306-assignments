@@ -1,6 +1,6 @@
 import NewItem from "./NewItem";
 import ItemList from "./ItemList";
-import itemsData from "./items.json";
+import itemsData from "./Items.json";
 import { useState } from "react"; 
 
 export default function Page(){
