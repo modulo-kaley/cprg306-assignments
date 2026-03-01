@@ -12,7 +12,7 @@ export default function Home(){
   return ( 
     <main className="min-h-screen bg-earth-pearl dark:bg-earth-armadillo px-6 py-16 flex flex-col items-center">
       <div className="text-center mb-12">
-        <p className="font-sans text-4xl uppercase tracking-widest text-earth-stonewall dark:text-earth-oyster mb-3">
+        <p className="font-sans text-xs uppercase tracking-widest text-earth-stonewall dark:text-earth-oyster mb-3">
           CPRG 306
         </p>
         <h1 className="font-serif text-4xl text-earth-soya dark:text-earth-pearl">
