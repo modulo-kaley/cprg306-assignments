@@ -10,7 +10,7 @@ export default function Page(){
         setItems([...items, newItem]);
     };
 return(
-    <main className="min-h-screen flex flex-col items-center p-8 bg-earth-pearl dark:bg-earth-armadillo">
+    <main className="min-h-screen flex flex-col items-center p-8 pr-16 bg-earth-pearl dark:bg-earth-armadillo">
         <section className="w-full max-w-lg">
             <h1 className="font-serif text-4xl text-earth-soya dark:text-earth-pearl mb-2 text-center">
                 Shopping List
