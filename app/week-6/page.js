@@ -10,9 +10,14 @@ export default function Page(){
         setItems([...items, newItem]);
     };
 return(
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-950 text-white">
+    <main className="min-h-screen flex flex-col items-center p-8 bg-earth-pearl dark:bg-earth-armadillo">
         <section className="w-full max-w-lg">
-            <h1 className="text-4xl font-bold mb-8 tracking-tight text-center">Shopping List</h1>
+            <h1 className="font-serif text-4xl text-earth-soya dark:text-earth-pearl mb-2 text-center">
+                Shopping List
+            </h1>
+            <p className="font-sans text-xs uppercase tracking-widest text-earth-stonewall dark:text-earth-oyster text-center mb-8">
+                Your items
+            </p>
             <NewItem onAddItem={handleAddItem}/>
             <ItemList items={items}/>
         </section>
