@@ -5,11 +5,21 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const html = document.documentElement;
-    if (isDark) {
-      html.classList.add("dark");
+    // Start from system preference
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setIsDark(prefersDark);
+    if (prefersDark) {
+      document.documentElement.classList.add("dark");
     } else {
-      html.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   }, [isDark]);
 
@@ -18,7 +28,7 @@ export default function ThemeToggle() {
       onClick={() => setIsDark(!isDark)}
       className="
         fixed top-4 right-4 z-50
-        w-12 h-12 rounded-pill
+        w-12 h-12 rounded-full
         bg-earth-bison dark:bg-earth-soya
         border border-earth-stonewall/30
         flex items-center justify-center
