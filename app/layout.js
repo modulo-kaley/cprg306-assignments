@@ -1,5 +1,6 @@
 import { Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
+import ThemeToggle from "./components/ThemeToggle";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -19,9 +20,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${lora.variable} ${dmSans.variable} antialiased`}
-      >
+      <body className={`${lora.variable} ${dmSans.variable} antialiased`}>
+        <ThemeToggle />
         {children}
       </body>
     </html>
