@@ -80,7 +80,7 @@ export default function NavBar() {
             className="btn-theme-toggle"
             aria-label="Toggle dark mode"
           >
-            {darkModeOn ? "🌙" : "☀️"}
+            {typeof window !== "undefined" ? (darkModeOn ? "🌙" : "☀️") : null}
           </button>
 
         </div>

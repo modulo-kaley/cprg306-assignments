@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function NewItem(){
+export default function NewItem() {
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [category, setCategory] = useState("produce");
@@ -17,11 +17,12 @@ export default function NewItem(){
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-gray-800 rounded-xl p-6">
-            <label className="flex flex-col gap-1 text-sm font-semibold text-gray-300">
+        <form onSubmit={handleSubmit} className="card flex flex-col gap-4">
+            <label htmlFor="name" className="label">
                 Item Name
                 <input
-                    className="w-full p-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    id="name"
+                    className="input"
                     type="text"
                     placeholder="Enter the item name here"
                     value={name}
@@ -31,10 +32,11 @@ export default function NewItem(){
             </label>
 
             <div className="flex gap-4">
-                <label className="flex flex-col gap-1 text-sm font-semibold text-gray-300 w-1/2">
+                <label htmlFor="quantity" className="label w-1/2">
                     Quantity
                     <input
-                        className="w-full p-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        id="quantity"
+                        className="input"
                         type="number"
                         min="1"
                         max="99"
@@ -43,10 +45,11 @@ export default function NewItem(){
                     />
                 </label>
 
-                <label className="flex flex-col gap-1 text-sm font-semibold text-gray-300 w-1/2">
+                <label htmlFor="category" className="label w-1/2">
                     Category
                     <select
-                        className="w-full p-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        id="category"
+                        className="input"
                         value={category}
                         onChange={(event) => setCategory(event.target.value)}
                     >
@@ -65,11 +68,7 @@ export default function NewItem(){
                 </label>
             </div>
 
-            <button
-                type="submit"
-                className="w-full mt-2 p-3 rounded-xl bg-gray-700 hover:bg-gray-600 transition-colors font-bold text-lg text-white">
-                +
-            </button>
+            <button type="submit" className="btn-primary">+</button>
         </form>
     );
 }
