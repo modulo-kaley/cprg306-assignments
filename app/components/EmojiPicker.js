@@ -1,24 +1,22 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-// grouped emojis by grocery category
 const emojiGroups = {
-  "🥦 Produce":     ["🍎","🍌","🍇","🍓","🥦","🥕","🌽","🍅","🥑","🍋","🍊","🫐","🍑","🍒","🍈","🥭","🍍","🥥","🍆","🥔","🧅","🧄","🥬","🥒","🌶️","🫑","🍄","🥝","🍐","🫒","🌿","🪴"],
-  "🥛 Dairy":       ["🥛","🧀","🧈","🍦","🥚","🫙","🍮","🧆"],
-  "🍞 Bakery":      ["🍞","🥐","🥖","🧁","🍰","🥨","🫓","🥞","🧇","🍩","🍪","🎂","🍫","🥧"],
-  "🍗 Meat":        ["🍗","🥩","🥓","🌭","🍖","🍣","🍤","🦐","🦞","🦀","🦑","🐟","🥚","🍳","🫕"],
-  "🧃 Beverages":   ["🧃","☕","🍵","🧋","🥤","🍶","🧉","🫖","🍺","🍷","🥂","🍹","🧊","💧","🍼","🫗"],
-  "🍿 Snacks":      ["🍿","🍪","🍫","🍬","🍭","🥜","🫘","🧃","🍡","🍢","🍣","🍱","🥮","🍘","🍙","🍚","🍛","🫔","🌮","🌯"],
-  "🥫 Canned":      ["🥫","🍯","🧂","🫙","🥣","🍲","🫕"],
-  "🌾 Dry Goods":   ["🌾","🍚","🍝","🥣","🫘","🌰","🥜","🧆","🫓","🥙","🧇","🥞"],
-  "❄️ Frozen":      ["🧊","🍨","🫕","🥧","🍦","🧁","🥐","🍕","🌮"],
-  "🏠 Household":   ["🧼","🪥","🧻","🫧","🧹","🧴","🪒","🧽","🪤","🧺","🪣","🫙","🪴","🕯️","🪑"],
-  "💊 Health":      ["💊","🩺","🩹","🧬","🫀","🩻","💉","🧪","🌡️","🪥","🧴","🫧"],
-  "🐾 Pet":         ["🐾","🦴","🐠","🐹","🐕","🐈","🐇","🦜","🐢","🦎"],
-  "🌺 Beauty":      ["🌺","💄","💅","🪞","🧴","🪥","💋","🌸","🧖","💆"],
+  "🍌 Produce":   ["🍎","🍌","🍇","🍓","🥦","🥕","🌽","🍅","🥑","🍋","🍊","🫐","🍑","🍒","🍈","🥭","🍍","🥥","🍆","🥔","🧅","🧄","🥬","🥒","🌶️","🫑","🍄","🥝","🍐","🫒","🌿","🪴"],
+  "🥛 Dairy":     ["🥛","🧀","🧈","🍦","🥚","🫙","🍮","🧆"],
+  "🥐 Bakery":    ["🍞","🥐","🥖","🧁","🍰","🥨","🫓","🥞","🧇","🍩","🍪","🎂","🍫","🥧"],
+  "🍗 Meat":      ["🍗","🥩","🥓","🌭","🍖","🍣","🍤","🦐","🦞","🦀","🦑","🐟","🥚","🍳","🫕"],
+  "🧃 Beverages": ["🧃","☕","🍵","🧋","🥤","🍶","🧉","🫖","🍺","🍷","🥂","🍹","🧊","💧","🍼","🫗"],
+  "🍿 Snacks":    ["🍿","🍪","🍫","🍬","🍭","🥜","🫘","🧃","🍡","🍢","🍣","🍱","🥮","🍘","🍙","🍚","🍛","🫔","🌮","🌯"],
+  "🥫 Canned":    ["🥫","🍯","🧂","🫙","🥣","🍲","🫕"],
+  "🌾 Dry Goods": ["🌾","🍚","🍝","🥣","🫘","🌰","🥜","🧆","🫓","🥙","🧇","🥞"],
+  "❄️ Frozen":    ["🧊","🍨","🫕","🥧","🍦","🧁","🥐","🍕","🌮"],
+  "🏠 Household": ["🧼","🪥","🧻","🫧","🧹","🧴","🪒","🧽","🪤","🧺","🪣","🫙","🪴","🕯️","🪑"],
+  "💊 Health":    ["💊","🩺","🩹","🧬","🫀","🩻","💉","🧪","🌡️","🪥","🧴","🫧"],
+  "🦴 Pet":       ["🐾","🦴","🐠","🐹","🐕","🐈","🐇","🦜","🐢","🦎"],
+  "💅 Beauty":    ["🌺","💄","💅","🪞","🧴","🪥","💋","🌸","🧖","💆"],
 };
 
-// human-readable names for individual emojis on hover
 const emojiNames = {
   "🍎":"Red Apple","🍌":"Banana","🍇":"Grapes","🍓":"Strawberry","🥦":"Broccoli",
   "🥕":"Carrot","🌽":"Corn","🍅":"Tomato","🥑":"Avocado","🍋":"Lemon","🍊":"Orange",
@@ -53,74 +51,57 @@ const emojiNames = {
 };
 
 export default function EmojiPicker({ selectedEmoji, onEmojiSelect }) {
-  // tracks whether the picker panel is open or closed
   const [isOpen, setIsOpen] = useState(false);
-  // tracks which category tab is active
-  const [activeGroup, setActiveGroup] = useState("🥦 Produce");
-  // ref attached to the wrapper div so we can detect clicks outside it
+  const [activeGroup, setActiveGroup] = useState(() => Object.keys(emojiGroups)[0]);
   const pickerRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // if the click was outside the picker wrapper, close it
       if (pickerRef.current && !pickerRef.current.contains(event.target)) {
         setIsOpen(false);
-        console.log("🖱️ Clicked outside — closing emoji picker");
       }
     };
-
-    // only listen when the picker is open
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    // cleanup the listener when picker closes or component unmounts
+    if (isOpen) document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
   const handleEmojiClick = (emoji) => {
     onEmojiSelect(emoji);
     setIsOpen(false);
-    console.log("✅ Emoji selected:", emoji);
   };
 
   return (
-    // ref here so click outside detection knows the boundary of the picker
     <div className="relative" ref={pickerRef}>
 
-      {/* trigger button — shows the selected emoji or sparkle placeholder */}
+      {/* trigger button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 rounded-xl bg-earth-pearl dark:bg-earth-armadillo border-2 border-earth-stonewall/30 hover:border-earth-copper transition-colors duration-200 flex items-center justify-center text-xl"
+        className="emoji-trigger"
       >
         {selectedEmoji || "✨"}
       </button>
 
-      {/* dropdown picker panel */}
+      {/* dropdown panel */}
       {isOpen && (
-        <div className="absolute z-50 top-14 left-0 w-72 bg-earth-bison dark:bg-earth-soya rounded-xl shadow-xl border border-earth-stonewall/20 p-3">
+        <div className="emoji-panel">
 
-          {/* category tabs — title shows full group name on hover */}
-          <div className="flex flex-wrap gap-1 mb-3">
+          {/* category tabs */}
+          <div className="emoji-tab-container">
             {Object.keys(emojiGroups).map((group) => (
               <button
                 key={group}
                 type="button"
                 title={group}
                 onClick={() => setActiveGroup(group)}
-                className={`text-xs px-2 py-1 rounded-lg transition-colors duration-150 font-sans
-                  ${activeGroup === group
-                    ? "bg-earth-copper text-earth-pearl"
-                    : "bg-earth-pearl/20 text-earth-armadillo dark:text-earth-pearl hover:bg-earth-copper/40"
-                  }`}
+                className={`emoji-tab ${activeGroup === group ? "emoji-tab-active" : ""}`}
               >
                 {group.split(" ")[0]}
               </button>
             ))}
           </div>
 
-          {/* emoji grid — title shows emoji name on hover */}
+          {/* emoji grid */}
           <div className="grid grid-cols-6 gap-1">
             {emojiGroups[activeGroup].map((emoji) => (
               <button
@@ -128,32 +109,33 @@ export default function EmojiPicker({ selectedEmoji, onEmojiSelect }) {
                 type="button"
                 title={emojiNames[emoji] || emoji}
                 onClick={() => handleEmojiClick(emoji)}
-                className="w-10 h-10 rounded-lg hover:bg-earth-copper/30 transition-colors duration-150 flex items-center justify-center text-xl"
+                className="emoji-btn"
               >
                 {emoji}
               </button>
             ))}
           </div>
 
-          {/* close button — also available as a fallback to clicking outside */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(false)}
-            className="mt-2 w-full text-xs font-sans text-earth-stonewall hover:text-earth-copper transition-colors duration-150"
-          >
-            close
-          </button>
-
-          {/* clear button — only shows if an emoji is already selected */}
-          {selectedEmoji && (
+          {/* close / clear actions */}
+          <div className="flex gap-2 mt-2">
             <button
               type="button"
-              onClick={() => { onEmojiSelect(""); setIsOpen(false); }}
-              className="mt-1 w-full text-xs font-sans text-earth-stonewall hover:text-earth-copper transition-colors duration-150"
+              onClick={() => setIsOpen(false)}
+              className="emoji-action"
             >
-              clear emoji
+              close
             </button>
-          )}
+
+            {selectedEmoji && (
+              <button
+                type="button"
+                onClick={() => { onEmojiSelect(""); setIsOpen(false); }}
+                className="emoji-action"
+              >
+                clear
+              </button>
+            )}
+          </div>
 
         </div>
       )}
