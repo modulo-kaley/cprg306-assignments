@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import EmojiPicker from "../components/EmojiPicker";
 const initialState = { name: "", quantity: 1, category: "produce" };
 
 export default function NewItem({ onAddItem }){
@@ -23,18 +24,24 @@ export default function NewItem({ onAddItem }){
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-earth-bison dark:bg-earth-soya rounded-xl p-6">
             <label 
-                htmlFor="name"
-                className="flex flex-col gap-1 font-sans text-sm font-medium text-earth-armadillo dark:text-earth-pearl">
+            htmlFor="name"
+            className="flex flex-col gap-1 font-sans text-sm font-medium text-earth-armadillo dark:text-earth-pearl">
                 Item Name
-                <input 
-                    id="name" 
-                    name="name"
-                    className="w-full p-2 rounded-lg bg-earth-pearl dark:bg-earth-armadillo text-earth-soya dark:text-earth-pearl placeholder-earth-stonewall focus:outline-none focus:ring-2 focus:ring-earth-copper"
-                    type="text"
-                    placeholder="Enter the item name here"
-                    value={item.name}
-                    onChange={handleChange}
-                />
+                <div className="flex gap-2 items-center">
+                    <input 
+                        id="name" 
+                        name="name"
+                        className="flex-1 p-2 rounded-lg bg-earth-pearl dark:bg-earth-armadillo text-earth-soya dark:text-earth-pearl placeholder-earth-stonewall focus:outline-none focus:ring-2 focus:ring-earth-copper"
+                        type="text"
+                        placeholder="Enter the item name here"
+                        value={item.name}
+                        onChange={handleChange}
+                    />
+                    <EmojiPicker
+                        selectedEmoji={item.emoji}
+                        onEmojiSelect={(emoji) => setItem({ ...item, emoji })}
+                    />
+                </div>
             </label>
 
             <div className="flex gap-4">
