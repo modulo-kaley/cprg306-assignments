@@ -1,13 +1,44 @@
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
+/* Styling Flow Notes: 
+* 
+* CSS variables (:root / .dark) 
+*           ↓ 
+* Tailwind registers them (@theme inline) 
+*           ↓ 
+* You compose them into components (@layer + @apply) 
+*           ↓ 
+* Components used cleanly in JSX
+*
+*/ 
+
+/* ─── Semantic tokens: Light mode ─────────────────────────── */
 :root {
-  --background: #E3DED1;
-  --foreground: #5F5A4D;
+  --color-bg: #E3DED1;
+  --color-surface: #C1B59F;
+  --color-surface-raised: #E3DED1;
+  --color-text-primary: #4F493F;
+  --color-text-muted: #908471;
+  --color-border: #908471;
+  --color-accent: #7B5037;
+  --color-accent-hover: #7B5037;
 }
 
+/* ─── Semantic tokens: Dark mode ──────────────────────────── */
+.dark {
+  --color-bg: #4F493F;
+  --color-surface: #5F5A4D;
+  --color-surface-raised: #4F493F;
+  --color-text-primary: #E3DED1;
+  --color-text-muted: #969286;
+  --color-border: #908471;
+  --color-accent: #7B5037;
+  --color-accent-hover: #C1906A;
+}
+
+/* ─── Tailwind theme ───────────────────────────────────────── */
 @theme inline {
-  /* Earth Colors */
   --color-earth-pearl: #E3DED1;
   --color-earth-bison: #C1B59F;
   --color-earth-stonewall: #908471;
@@ -17,11 +48,18 @@
   --color-earth-brown: #9D8161;
   --color-earth-copper: #7B5037;
 
-  /* Fonts */
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+
   --font-sans: var(--font-dm-sans);
   --font-serif: var(--font-lora);
 
-  /* Border Radius */
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
@@ -29,7 +67,88 @@
   --radius-pill: 9999px;
 }
 
+/* ─── Base styles ──────────────────────────────────────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* ─── Component classes ────────────────────────────────────── */
+@layer components {
+
+  /* General */
+  .card {
+    @apply bg-surface border border-border/30 rounded-xl px-6 py-4;
+  }
+
+  .input {
+    @apply w-full p-2 rounded-lg bg-surface-raised text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent;
+  }
+
+  .label {
+    @apply flex flex-col gap-1 font-sans text-sm font-medium text-text-primary;
+  }
+
+  .btn-primary {
+    @apply w-full mt-2 p-3 rounded-xl bg-accent text-earth-pearl font-sans font-bold text-lg hover:opacity-90 transition-opacity duration-200;
+  }
+
+  .btn-sort {
+    @apply px-4 py-2 rounded-md font-sans font-medium text-sm bg-surface text-text-primary transition-colors duration-200 hover:bg-border hover:text-earth-pearl;
+  }
+
+  .btn-sort-active {
+    @apply bg-accent text-earth-pearl;
+  }
+
+  /* Home page */
+  .home-link {
+    @apply bg-surface border border-border/30 rounded-xl px-6 py-4 font-sans text-sm font-medium text-text-primary hover:bg-border hover:text-earth-pearl transition-colors duration-200;
+  }
+
+  /* NavBar */
+  .nav {
+    @apply w-full bg-surface border-b border-border/30 px-6 py-4 shadow-sm;
+  }
+
+  .nav-logo {
+    @apply font-serif text-xl font-semibold text-text-primary hover:text-accent-hover transition-colors;
+  }
+
+  .nav-link {
+    @apply font-sans text-sm text-text-primary hover:text-accent-hover transition-colors;
+  }
+
+  .btn-theme-toggle {
+    @apply w-9 h-9 rounded-full bg-surface-raised border border-border/30 flex items-center justify-center text-lg hover:bg-border transition-colors duration-200 shadow-md;
+  }
+
+  .nav-dropdown-menu {
+    @apply absolute top-full right-0 mt-2 w-36 bg-surface border border-border/30 rounded-xl shadow-lg overflow-hidden;
+  }
+  
+  .nav-dropdown-item {
+    @apply block w-full px-4 py-2 font-sans text-sm text-text-primary hover:bg-surface-raised transition-colors duration-200;
+  }
+
+  /* EmojiPicker */
+  .emoji-trigger {
+    @apply w-12 h-12 rounded-xl bg-surface-raised border-2 border-border/30 hover:border-accent transition-colors duration-200 flex items-center justify-center text-xl;
+  }
+
+  .emoji-tab {
+    @apply text-xl flex items-center justify-center w-9 h-9 rounded-full font-sans transition-colors duration-150 bg-border/20 text-text-primary hover:bg-accent/40;
+  }
+
+  .emoji-btn {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center text-xl hover:bg-surface-raised transition-colors duration-150;
+  }
+
+  .emoji-panel {
+    @apply absolute z-50 top-14 left-0 w-72 bg-surface border border-border/20 rounded-xl shadow-xl p-3;
+  }
+
+  .emoji-tab-container {
+    @apply grid grid-cols-7 gap-1 mb-3;
+  }
 }
