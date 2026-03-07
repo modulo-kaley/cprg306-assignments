@@ -1,6 +1,6 @@
 import { Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
-import ThemeToggle from "./components/ThemeToggle";
+import NavBar from "./components/NavBar";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -17,11 +17,23 @@ export const metadata = {
   description: "Living, Laughing, Learning",
 };
 
+const themeScript = `
+  (function() {
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = saved ? saved === "dark" : prefersDark;
+    if (isDark) document.documentElement.classList.add("dark");
+  })()
+`;
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${lora.variable} ${dmSans.variable} antialiased`}>
-        <ThemeToggle />
+        <NavBar />
         {children}
       </body>
     </html>
