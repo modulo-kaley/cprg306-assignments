@@ -9,6 +9,7 @@ const weekLinks = [
   { href: "/week-5", label: "Week 5" },
   { href: "/week-6", label: "Week 6" },
   { href: "/week-7", label: "Week 7" },
+  { href: "/week-8", label: "Week 8" },
 ];
 
 export default function NavBar() {
