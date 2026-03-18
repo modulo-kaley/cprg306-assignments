@@ -1,7 +1,9 @@
+// consider making the site header a component 
+
 import { Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
-
+import { AuthProvider } from "./contexts/AuthContext";
 // ─── Fonts ─────────────────────────────────────────────────
 // Lora: serif font for headings (--font-lora)
 const lora = Lora({
@@ -27,6 +29,7 @@ export const metadata = {
 // Checks localStorage for a saved preference, falls back to
 // the user's system preference (prefers-color-scheme).
 // Adds "dark" class to <html> instantly — no flash, no mismatch.
+
 const themeScript = `
   (function() {
     const saved = localStorage.getItem("theme");
@@ -49,6 +52,9 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${lora.variable} ${dmSans.variable} antialiased`}>
+        <AuthProvider>
+          {/* In the future make the user available everywhere HERE */}
+        </AuthProvider>
         <NavBar />
         {children}
       </body>

@@ -2,7 +2,7 @@
 import Item from "./Item";
 import { useState } from "react";
 
-export default function ItemList({ items }) {
+export default function ItemList({ items, onItemSelect }) {
     const [sortBy, setSortBy] = useState("name");
 
     const sortedItems = [...items].sort((a, b) =>
@@ -28,7 +28,7 @@ export default function ItemList({ items }) {
 
             <ul className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-4">
                 {sortedItems.map((item) => (
-                    <Item key={item.id} {...item} />
+                    <Item key={item.id} {...item} onSelect={() => onItemSelect(item)} />
                 ))}
             </ul>
         </>
