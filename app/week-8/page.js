@@ -1,7 +1,7 @@
 "use client";
 import NewItem from "./NewItem";
 import ItemList from "./ItemList";
-import MealIdeas from "./MealIdeas";
+import MealIdeas from "../components/MealIdeas";
 import itemsData from "./Item.json";
 import { useState } from "react";
 
