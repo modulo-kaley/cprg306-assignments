@@ -3,7 +3,7 @@
 import { Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
-import { AuthProvider } from "./contexts/AuthContext";
+// import { AuthProvider } from "./contexts/AuthContext";
 // ─── Fonts ─────────────────────────────────────────────────
 // Lora: serif font for headings (--font-lora)
 const lora = Lora({
@@ -52,9 +52,9 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${lora.variable} ${dmSans.variable} antialiased`}>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           {/* In the future make the user available everywhere HERE */}
-        </AuthProvider>
+        {/* </AuthProvider> */}
         <NavBar />
         {children}
       </body>
