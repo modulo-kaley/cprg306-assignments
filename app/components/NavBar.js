@@ -14,13 +14,13 @@ const weekLinks = [
 ];
 
 export default function NavBar() {
-  // Initialize dark mode from the <html> class set by the inline theme script
-  // in layout.js — keeps the toggle button in sync on first render.
-  const [darkModeOn, setDarkModeOn] = useState(
-    () => typeof document !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : false
-  );
+  const [darkModeOn, setDarkModeOn] = useState(false);
+
+  // Sync with the <html> class set by the inline theme script in layout.js.
+  // Must run in useEffect to avoid a server/client hydration mismatch.
+  useEffect(() => {
+    setDarkModeOn(document.documentElement.classList.contains("dark"));
+  }, []);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
