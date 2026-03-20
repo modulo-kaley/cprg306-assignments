@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
+// All weekly assignment routes — add a new entry here when a new week is added.
 const weekLinks = [
   { href: "/week-2", label: "Week 2" },
   { href: "/week-3", label: "Week 3" },
@@ -13,6 +14,8 @@ const weekLinks = [
 ];
 
 export default function NavBar() {
+  // Initialize dark mode from the <html> class set by the inline theme script
+  // in layout.js — keeps the toggle button in sync on first render.
   const [darkModeOn, setDarkModeOn] = useState(
     () => typeof document !== "undefined"
       ? document.documentElement.classList.contains("dark")
@@ -21,6 +24,7 @@ export default function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  // Close the assignments dropdown when the user clicks anywhere outside it.
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -31,6 +35,8 @@ export default function NavBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownOpen]);
 
+  // Toggle dark mode: update the <html> class and persist the choice to
+  // localStorage so the inline theme script can restore it on next load.
   const handleToggle = () => {
     const newDarkModeOn = !darkModeOn;
     document.documentElement.classList.toggle("dark", newDarkModeOn);

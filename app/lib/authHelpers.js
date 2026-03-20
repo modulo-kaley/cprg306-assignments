@@ -4,8 +4,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 
-
-// async function that uses the create user logic with email and password
+// Creates a new Firebase user with email + password.
+// Returns { user, error: null } on success, { user: null, error: string } on failure.
 export async function signUpWithEmailAndPassword(email, password) {
     try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -19,6 +19,8 @@ export async function signUpWithEmailAndPassword(email, password) {
     }
 }
 
+// Signs the current user out.
+// Returns { error: null } on success, { error: string } on failure.
 export async function logout() {
     try {
         await firebaseSignOut(auth);

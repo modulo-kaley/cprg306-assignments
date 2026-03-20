@@ -6,15 +6,22 @@ import itemsData from "./Item.json";
 import { useState } from "react";
 
 export default function Page() {
+    // Items list — seeded from local JSON, updated when the user adds a new item.
+    // TODO: replace with Firestore reads/writes once auth is wired up.
     const [items, setItems] = useState(itemsData);
+
+    // Name of the item the user last clicked, cleaned up for the MealDB API call.
     const [selectedItemName, setSelectedItemName] = useState("");
 
+    // Append a new item to the list. Called by NewItem on form submit.
     const handleAddItem = (newItem) => {
         setItems((prev) => [...prev, newItem]);
     };
 
-    // cleans up the item name before passing it to the API
-    // removes anything after a comma (e.g. "1 kg"), trims whitespace, strips emojis
+    // Strip extra detail from the item name before sending it to the MealDB API:
+    // - drop anything after a comma (e.g. "apples, 1 kg" → "apples")
+    // - remove emojis (the API doesn't understand them)
+    // - trim surrounding whitespace
     const handleItemSelect = (item) => {
         const cleanedName = item.name
             .split(",")[0]

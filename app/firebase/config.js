@@ -1,8 +1,10 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-// import analytics
 import { getAnalytics } from "firebase/analytics";
-// set up the configuration for env variables to connect the app to the backend
+
+// Firebase project credentials — values come from .env so they are never
+// hard-coded in source. All keys are prefixed NEXT_PUBLIC_ so Next.js
+// exposes them to the browser bundle.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -13,12 +15,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
+// Prevent re-initializing the app on hot reloads (Next.js dev mode runs this
+// module more than once). Re-use the existing app if one already exists.
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
+// Analytics only runs in the browser — getAnalytics throws on the server.
 let analytics;
 if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
+
 const auth = getAuth(app);
 
 export { app, analytics, auth };

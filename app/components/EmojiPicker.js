@@ -50,11 +50,16 @@ const emojiNames = {
   "🌸":"Cherry Blossom","🧖":"Face Mask","💆":"Massage",
 };
 
+// Emoji picker that opens as a dropdown panel.
+// selectedEmoji: the currently chosen emoji (shown on the trigger button).
+// onEmojiSelect: called with the chosen emoji string when the user picks one.
 export default function EmojiPicker({ selectedEmoji, onEmojiSelect }) {
   const [isOpen, setIsOpen] = useState(false);
+  // Default the active tab to the first group in emojiGroups.
   const [activeGroup, setActiveGroup] = useState(() => Object.keys(emojiGroups)[0]);
   const pickerRef = useRef(null);
 
+  // Close the picker when the user clicks outside of it.
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (pickerRef.current && !pickerRef.current.contains(event.target)) {
@@ -65,6 +70,7 @@ export default function EmojiPicker({ selectedEmoji, onEmojiSelect }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
+  // Notify the parent of the selection and close the panel.
   const handleEmojiClick = (emoji) => {
     onEmojiSelect(emoji);
     setIsOpen(false);

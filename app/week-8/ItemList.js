@@ -2,9 +2,13 @@
 import Item from "./Item";
 import { useState } from "react";
 
+// Renders the shopping list with sort controls.
+// onItemSelect is called with the full item object when the user clicks a row.
 export default function ItemList({ items, onItemSelect }) {
     const [sortBy, setSortBy] = useState("name");
 
+    // Copy the array before sorting — sort() mutates in place and would
+    // cause unexpected re-renders if we sorted the original state array.
     const sortedItems = [...items].sort((a, b) =>
         a[sortBy].localeCompare(b[sortBy])
     );

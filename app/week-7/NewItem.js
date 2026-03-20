@@ -2,21 +2,27 @@
 import { useState } from "react";
 import EmojiPicker from "../components/EmojiPicker";
 
+// Default form values — used on mount and after a successful submit.
 const initialState = { name: "", quantity: 1, category: "produce" };
 
 const categories = ["produce", "dairy", "bakery", "meat", "frozen foods",
     "canned goods", "dry goods", "beverages", "snacks", "household", "other"];
 
+// Form that lets the user add a new item to the shopping list.
+// Calls onAddItem with the new item object, then resets to initialState.
 export default function NewItem({ onAddItem }) {
     const [item, setItem] = useState(initialState);
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // Attach a unique id so React can key the list correctly.
         const newItem = { ...item, id: crypto.randomUUID() };
         onAddItem(newItem);
         setItem(initialState);
     };
 
+    // Single handler for all inputs — uses the input's name attribute to know
+    // which field of the item object to update.
     const handleChange = (e) => {
         const { name, value } = e.target;
         setItem((prev) => ({ ...prev, [name]: value }));
