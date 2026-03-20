@@ -25,6 +25,6 @@ if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
 
-const auth = getAuth(app);
+const auth = typeof window !== "undefined" ? getAuth(app) : null;
 
 export { app, analytics, auth };
