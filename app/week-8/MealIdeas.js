@@ -16,20 +16,38 @@ async function fetchMealIdeas(ingredient) {
 // Re-fetches automatically whenever the ingredient prop changes.
 export default function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!ingredient) return;
+    // Nothing selected yet — clear the list and bail early.
+    if (!ingredient) {
+      setMeals([]);
+      return;
+    }
 
     async function loadMealIdeas() {
-      const meals = await fetchMealIdeas(ingredient);
-      setMeals(meals);
+      setLoading(true);
+      try {
+        const meals = await fetchMealIdeas(ingredient);
+        setMeals(meals);
+      } finally {
+        setLoading(false);
+      }
     }
+
     loadMealIdeas();
-  }, [ingredient]);
+  }, [ingredient]); // re-run whenever the selected ingredient changes
 
   return (
     <div>
       <h2>Meal Ideas for {ingredient}</h2>
+
+      {loading && <p>Loading...</p>}
+
+      {!loading && meals.length === 0 && ingredient && (
+        <p>No meal ideas found for {ingredient}.</p>
+      )}
+
       <ul>
         {meals.map((meal) => (
           <li key={meal.idMeal}>{meal.strMeal}</li>
