@@ -165,7 +165,7 @@ body {
   }
 
   .login-card {
-    @apply card max-w-md flex flex-col gap-4;
+    @apply bg-surface border border-border/30 rounded-xl px-6 py-4 max-w-md flex flex-col gap-4;
   }
 
   .login-card .user-greeting {

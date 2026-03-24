@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
 
 // Context object that will hold the auth state for the whole app.
@@ -43,8 +43,15 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
+  const gitHubSignIn = () => {
+    const provider = new GithubAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+
+  const firebaseSignOut = () => signOut(auth);
+
   return (
-    <AuthContext.Provider value={{ authUser, loading }}>
+    <AuthContext.Provider value={{ user: authUser, loading, gitHubSignIn, firebaseSignOut }}>
       {children}
     </AuthContext.Provider>
   );
@@ -60,4 +67,8 @@ export function useAuth() {
     );
   }
   return context;
+}
+
+export function useUserAuth() {
+  return useAuth();
 }
