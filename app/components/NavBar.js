@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { useUserAuth } from "../contexts/AuthContext";
+import { useUserAuth } from "./contexts/AuthContext";
 
 // All weekly assignment routes — add a new entry here when a new week is added.
 const weekLinks = [

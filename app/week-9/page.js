@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useUserAuth } from "../contexts/AuthContext";
+import { useUserAuth } from "../components/contexts/AuthContext";
 
 export default function Page() {
   const { user, gitHubSignIn } = useUserAuth();
