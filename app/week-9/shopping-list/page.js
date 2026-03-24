@@ -3,9 +3,17 @@ import NewItem from "./NewItem";
 import ItemList from "./ItemList";
 import MealIdeas from "./MealIdeas";
 import itemsData from "./Item.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUserAuth } from "../../components/contexts/AuthContext";
 
 export default function Page() {
+    const { user } = useUserAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (user === null) router.push("/week-9");
+    }, [user, router]);
     // Items list — seeded from local JSON, updated when the user adds a new item.
     // TODO: replace with Firestore reads/writes once auth is wired up.
     const [items, setItems] = useState(itemsData);
