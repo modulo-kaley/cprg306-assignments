@@ -152,18 +152,17 @@ body {
     @apply grid grid-cols-7 gap-1 mb-3;
   }
   /* ─── Landing Page ─────────────────────────────────────────── */
-  .page-landing {
-    @apply min-h-screen bg-bg px-6 py-12 font-sans;
-  }
+.page-landing {
+  @apply min-h-screen bg-bg px-6 py-12 font-sans flex flex-col items-center justify-center;
+}
 
-  .page-landing h1 {
-    @apply font-serif text-3xl font-semibold text-text-primary mb-2;
-  }
+.page-landing h1 {
+  @apply font-serif text-3xl font-semibold text-text-primary mb-2 text-center;
+}
 
-  .page-landing .subtitle {
-    @apply text-text-muted text-sm mb-8;
-  }
-
+.page-landing .subtitle {
+  @apply text-text-muted text-sm mb-8 text-center;
+}
   .login-card {
     @apply bg-surface border border-border/30 rounded-xl px-6 py-4 max-w-md flex flex-col gap-4;
   }
