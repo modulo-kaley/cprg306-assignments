@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { useUserAuth } from "../contexts/AuthContext";
 
 // All weekly assignment routes — add a new entry here when a new week is added.
 const weekLinks = [
@@ -11,9 +12,14 @@ const weekLinks = [
   { href: "/week-6", label: "Week 6" },
   { href: "/week-7", label: "Week 7" },
   { href: "/week-8", label: "Week 8" },
+  { href: "/week-9", label: "Week 9" },
 ];
 
 export default function NavBar() {
+  // Pull auth state and sign-in/out functions from context so the nav
+  // can reactively show the correct button without any prop drilling.
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+
   const [darkModeOn, setDarkModeOn] = useState(false);
 
   // Sync with the <html> class set by the inline theme script in layout.js.
@@ -21,6 +27,7 @@ export default function NavBar() {
   useEffect(() => {
     setDarkModeOn(document.documentElement.classList.contains("dark"));
   }, []);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -82,6 +89,28 @@ export default function NavBar() {
             )}
           </div>
 
+          {/* Auth Button — shows 🔑 when logged out, 👤 when logged in.
+              Sits beside the theme toggle and reuses btn-theme-toggle
+              so both buttons stay visually consistent. */}
+          {user ? (
+            <button
+              onClick={firebaseSignOut}
+              className="btn-theme-toggle"
+              aria-label="Sign out"
+            >
+              👤
+            </button>
+          ) : (
+            <button
+              onClick={gitHubSignIn}
+              className="btn-theme-toggle"
+              aria-label="Sign in with GitHub"
+            >
+              🔑
+            </button>
+          )}
+
+          {/* Theme Toggle */}
           <button
             onClick={handleToggle}
             className="btn-theme-toggle"
