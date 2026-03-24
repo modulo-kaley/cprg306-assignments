@@ -5,7 +5,13 @@ import { auth } from "../firebase/config";
 
 // Context object that will hold the auth state for the whole app.
 // Consumed via the useAuth() hook below — never accessed directly.
-const AuthContext = createContext();
+// Default value prevents throws during Next.js static prerendering.
+const AuthContext = createContext({
+  user: null,
+  loading: true,
+  gitHubSignIn: () => Promise.resolve(),
+  firebaseSignOut: () => Promise.resolve(),
+});
 
 // Wraps the entire app (in layout.js) so every page can read auth state.
 // Provides: authUser (Firebase User object or null), loading (bool).
@@ -60,13 +66,7 @@ export function AuthProvider({ children }) {
 // Custom hook — call this in any client component to get the current user.
 // Throws if used outside of AuthProvider so mistakes are caught early.
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error(
-      "Context Error: useAuth must be used within the Auth Provider",
-    );
-  }
-  return context;
+  return useContext(AuthContext);
 }
 
 export function useUserAuth() {
