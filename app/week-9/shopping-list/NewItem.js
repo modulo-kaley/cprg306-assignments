@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import EmojiPicker from "../components/EmojiPicker";
+import EmojiPicker from "../../components/EmojiPicker";
 
 // Default form values — used on mount and after a successful submit.
 const initialState = { name: "", quantity: 1, category: "produce" };
