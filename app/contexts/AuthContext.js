@@ -25,14 +25,8 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(
       auth,
       (user) => {
-        if (user) {
-          console.log("User Authenticated: ", user.email);
-        } else {
-          console.log("No User Found");
-        }
         setAuthUser(user);
         setLoading(false);
-        console.log("loading complete");
       },
       (error) => {
         console.error("Auth error", error);
@@ -43,10 +37,7 @@ export function AuthProvider({ children }) {
 
     // Unsubscribe from the listener when the component unmounts to avoid
     // memory leaks and stale state updates.
-    return () => {
-      console.log("Cleaning up listener");
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const gitHubSignIn = () => {

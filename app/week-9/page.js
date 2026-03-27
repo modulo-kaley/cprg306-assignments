@@ -20,7 +20,11 @@ export default function Page() {
   // Triggers the GitHub OAuth popup. Redirect is handled by
   // the useEffect above once the user object is confirmed.
   const handleSignIn = async () => {
-    await gitHubSignIn();
+    try {
+      await gitHubSignIn();
+    } catch (error) {
+      console.error("Sign in failed", error);
+    }
   };
 
   return (

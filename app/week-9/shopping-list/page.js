@@ -8,12 +8,12 @@ import { useRouter } from "next/navigation";
 import { useUserAuth } from "../../components/contexts/AuthContext";
 
 export default function Page() {
-    const { user } = useUserAuth();
+    const { user, loading } = useUserAuth();
     const router = useRouter();
 
     useEffect(() => {
-        if (user === null) router.push("/week-9");
-    }, [user, router]);
+        if (!loading && !user) router.push("/week-9");
+    }, [user, loading, router]);
     // Items list — seeded from local JSON, updated when the user adds a new item.
     // TODO: replace with Firestore reads/writes once auth is wired up.
     const [items, setItems] = useState(itemsData);
