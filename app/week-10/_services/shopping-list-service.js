@@ -1,4 +1,4 @@
-import { db } from "../utils/firebase";
+import { db } from "@/app/firebase/config";
 import { collection, getDocs, addDoc, query } from "firebase/firestore";
 
 // Retrieves all items for a specific user from Firestore
