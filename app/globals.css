@@ -174,7 +174,7 @@ body {
   }
 
   .item-name {
-    @apply font-serif text-lg text-text-primary truncate;
+    @apply font-serif text-lg text-text-primary;
   }
 
   .item-meta {
