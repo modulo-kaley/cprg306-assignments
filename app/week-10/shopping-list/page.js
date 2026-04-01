@@ -42,15 +42,15 @@ export default function Page() {
         setSelectedItemName(cleanedName);
     };
 
-    const loadItems = async () => {
-        const items = await getItems(user.uid);
-        setItems(items);
-    };
-
     useEffect(() => {
+        const loadItems = async () => {
+            // catch if the user is logged out 
+            if (!user) return; 
+            const items = await getItems(user.uid);
+            setItems(items);
+        };
         loadItems();
     }, [user]);
-
     return (
         <main className="min-h-screen flex flex-col items-center p-8 bg-bg">
             <section className="w-full max-w-4xl">
