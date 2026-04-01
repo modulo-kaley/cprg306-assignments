@@ -25,8 +25,9 @@ export default function Page() {
     // Save the new item to Firestore under this user's items subcollection,
     // then attach the generated doc ID before updating local state. 
     const handleAddItem = async (newItem) => {
-    const id = await addItem(user.uid, newItem);
-    setItems((prev) => [...prev, { ...newItem, id }]);
+        if (!user) return;
+        const id = await addItem(user.uid, newItem);
+        setItems((prev) => [...prev, { ...newItem, id }]);
     };
 
     // Strip extra detail from the item name before sending it to the MealDB API:
