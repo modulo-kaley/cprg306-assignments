@@ -30,7 +30,7 @@ export default function ItemList({ items, onItemSelect }) {
                 </button>
             </div>
 
-            <ul className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-4">
+            <ul className="grid grid-cols-2 gap-4 p-4">
                 {sortedItems.map((item) => (
                     <Item key={item.id} {...item} onSelect={() => onItemSelect(item)} />
                 ))}
