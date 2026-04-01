@@ -2,7 +2,6 @@
 import NewItem from "./NewItem";
 import ItemList from "./ItemList";
 import MealIdeas from "./MealIdeas";
-import itemsData from "./Item.json";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserAuth } from "../../components/contexts/AuthContext";

@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 
 // Firebase project credentials — values come from .env so they are never
 // hard-coded in source. All keys are prefixed NEXT_PUBLIC_ so Next.js
@@ -28,3 +29,4 @@ if (typeof window !== "undefined") {
 const auth = typeof window !== "undefined" ? getAuth(app) : null;
 
 export { app, analytics, auth };
+export const db = getFirestore(app);
