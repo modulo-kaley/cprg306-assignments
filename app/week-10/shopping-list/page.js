@@ -2,9 +2,12 @@
 import NewItem from "./NewItem";
 import ItemList from "./ItemList";
 import MealIdeas from "./MealIdeas";
+import { getItems } from "../_services/shopping-list-service";
+import { addItem } from "../_services/shopping-list-service";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserAuth } from "../../components/contexts/AuthContext";
+
 
 export default function Page() {
     const { user, loading } = useUserAuth();
@@ -13,16 +16,17 @@ export default function Page() {
     useEffect(() => {
         if (!loading && !user) router.push("/week-10");
     }, [user, loading, router]);
-    // Items list — seeded from local JSON, updated when the user adds a new item.
-    // TODO: replace with Firestore reads/writes once auth is wired up.
-    const [items, setItems] = useState(itemsData);
+
+    const [items, setItems] = useState([]);
 
     // Name of the item the user last clicked, cleaned up for the MealDB API call.
     const [selectedItemName, setSelectedItemName] = useState("");
 
-    // Append a new item to the list. Called by NewItem on form submit.
-    const handleAddItem = (newItem) => {
-        setItems((prev) => [...prev, newItem]);
+    // Save the new item to Firestore under this user's items subcollection,
+    // then attach the generated doc ID before updating local state. 
+    const handleAddItem = async (newItem) => {
+    const id = await addItem(user.uid, newItem);
+    setItems((prev) => [...prev, { ...newItem, id }]);
     };
 
     // Strip extra detail from the item name before sending it to the MealDB API:
@@ -37,6 +41,15 @@ export default function Page() {
             .trim();
         setSelectedItemName(cleanedName);
     };
+
+    const loadItems = async () => {
+        const items = await getItems(user.uid);
+        setItems(items);
+    };
+
+    useEffect(() => {
+        loadItems();
+    }, [user]);
 
     return (
         <main className="min-h-screen flex flex-col items-center p-8 bg-bg">
