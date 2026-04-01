@@ -1,11 +1,11 @@
-export default function Item({ name, quantity, category, onSelect }) {
+export default function Item({ name, quantity, category, emoji, onSelect }) {
   return (
-    <li
-      className="card flex flex-col gap-1 cursor-pointer"
-      onClick={onSelect}
-    >
-      <h3 className="font-serif text-lg text-text-primary">{name}</h3>
-      <p className="font-sans text-sm text-text-muted">{quantity} · {category}</p>
+    <li className="item-card cursor-pointer" onClick={onSelect}>
+      <span className="item-emoji">{emoji || "✨"}</span>
+      <div className="item-info">
+        <h3 className="item-name">{name}</h3>
+        <p className="item-meta">{quantity} · {category}</p>
+      </div>
     </li>
   );
 }

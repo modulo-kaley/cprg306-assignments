@@ -151,6 +151,35 @@ body {
   .emoji-tab-container {
     @apply grid grid-cols-7 gap-1 mb-3;
   }
+
+  .emoji-tab-active {
+    @apply bg-accent text-earth-pearl;
+  }
+
+  .emoji-action {
+    @apply text-xs text-text-muted hover:text-text-primary transition-colors duration-150;
+  }
+
+  /* Item card */
+  .item-card {
+    @apply card flex items-center gap-3;
+  }
+
+  .item-emoji {
+    @apply text-2xl shrink-0;
+  }
+
+  .item-info {
+    @apply flex flex-col gap-1 min-w-0;
+  }
+
+  .item-name {
+    @apply font-serif text-lg text-text-primary truncate;
+  }
+
+  .item-meta {
+    @apply font-sans text-sm text-text-muted;
+  }
   /* ─── Landing Page ─────────────────────────────────────────── */
 .page-landing {
   @apply min-h-screen bg-bg px-6 py-12 font-sans flex flex-col items-center justify-center;
